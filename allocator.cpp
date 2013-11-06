@@ -5,12 +5,20 @@
 
 class allocator{
 public:
+	allocator(){initialize();}
+	~allocator(){release();}
 	void *alloc(size_t size);
 	void free(void *ptr, size_t size);
 	void get_allocate_info();
 private:
 	void align(size_t size);
+	void allocate_new_chunk(size_t size, uint32 idx);
+	void initialize();
+	void release(){BOOST_FOREACH(it, mem_allocated_list){::free(it);}};
 
+private:
+	std::list<char *> mem_allocated_list;
+	boost::mutex mutex_;
 	char *volatile free_block_[FREEBLOCK_INDEX(MAX_BYTES)+1];
 };
 
