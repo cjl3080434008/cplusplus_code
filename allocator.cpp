@@ -49,7 +49,7 @@ void allocator::free(void *ptr, size_t size)
 	 *--------
 	 *|	  p  |  p用于指向当前的地址空间
 	 *|------|
-	 *|	**pre|  pre用于指向pNext下一个
+	 *|	**pre|  pre(pte = (char **)p)用于指向pNext下一个
 	 *--------	  连续空间地址 
 	 ************************************/
 }
